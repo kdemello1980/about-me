@@ -108,6 +108,58 @@ public class Title {
 		return "Title [id=" + titleId + ", employer=" + employer + ", name=" + name + ", fromDate=" + fromDate
 				+ ", toDate=" + toDate + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((employer == null) ? 0 : employer.hashCode());
+		result = prime * result + ((fromDate == null) ? 0 : fromDate.hashCode());
+		result = prime * result + ((items == null) ? 0 : items.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + (int) (titleId ^ (titleId >>> 32));
+		result = prime * result + ((toDate == null) ? 0 : toDate.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Title other = (Title) obj;
+		if (employer == null) {
+			if (other.employer != null)
+				return false;
+		} else if (!employer.equals(other.employer))
+			return false;
+		if (fromDate == null) {
+			if (other.fromDate != null)
+				return false;
+		} else if (!fromDate.equals(other.fromDate))
+			return false;
+		if (items == null) {
+			if (other.items != null)
+				return false;
+		} else if (!items.equals(other.items))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (titleId != other.titleId)
+			return false;
+		if (toDate == null) {
+			if (other.toDate != null)
+				return false;
+		} else if (!toDate.equals(other.toDate))
+			return false;
+		return true;
+	}
 	
 	
 }
