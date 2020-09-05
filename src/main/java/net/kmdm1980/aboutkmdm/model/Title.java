@@ -28,7 +28,7 @@ public class Title {
 	 * Not sure if I need a bi-directional relation here.
 	 */
 	@ManyToOne
-	@JoinColumn(name = "employerId")
+//	@JoinColumn(name = "employerId")
 	private Employer employer;
 	
 	private String name;

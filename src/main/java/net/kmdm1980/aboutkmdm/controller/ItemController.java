@@ -21,6 +21,7 @@ public class ItemController {
 	@Autowired
 	private ItemRepository itemRepository;
 	
+	
 	@GetMapping("/items")
 	public List<Item> getAll(){
 		return itemRepository.findAll();
@@ -31,6 +32,8 @@ public class ItemController {
 		return itemRepository.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
 	}
 	
+//	@GetMapping("/items/employer/")
+	
 	@PostMapping("/items")
 	public Item addItem(@RequestBody Item newItem) {
 		return itemRepository.save(newItem);
@@ -40,7 +43,7 @@ public class ItemController {
 	public Item updateItem(@PathVariable Long id, @RequestBody Item newItem) {
 		 return itemRepository.findById(id).map(item -> {
 			 item.setText(newItem.getText());
-			 item.setTitle(newItem.getTitle());
+//			 item.setTitle(newItem.getTitle());
 			 return itemRepository.save(item);
 		 }).orElseGet(() -> {
 			 newItem.setId(id);

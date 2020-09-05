@@ -19,7 +19,7 @@ public class Item {
 	private Long itemId;
 	
 	@ManyToOne
-	@JoinColumn(name = "titleId")
+//	@JoinColumn(name = "titleId")
 	private Title title;
 
 	private String text;
