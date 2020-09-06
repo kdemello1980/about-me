@@ -3,6 +3,7 @@ package net.kmdm1980.aboutkmdm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import net.kmdm1980.aboutkmdm.exception.ItemNotFoundException;
 import net.kmdm1980.aboutkmdm.model.Item;
 import net.kmdm1980.aboutkmdm.repository.ItemRepository;
 
+@CrossOrigin
 @RestController
 public class ItemController {
 	
@@ -32,7 +34,10 @@ public class ItemController {
 		return itemRepository.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
 	}
 	
-//	@GetMapping("/items/employer/")
+	@GetMapping("/items/title/{id}")
+	public List<Item> getItemsByTitle(@PathVariable Long id){
+		return itemRepository.findAllByTitleId(id);
+	}
 	
 	@PostMapping("/items")
 	public Item addItem(@RequestBody Item newItem) {

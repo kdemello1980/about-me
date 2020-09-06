@@ -3,6 +3,7 @@ package net.kmdm1980.aboutkmdm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import net.kmdm1980.aboutkmdm.exception.CertificationNotFoundException;
 import net.kmdm1980.aboutkmdm.model.Certification;
 import net.kmdm1980.aboutkmdm.repository.CertificationRepository;
 
+@CrossOrigin
 @RestController
 public class CertificationController {
 

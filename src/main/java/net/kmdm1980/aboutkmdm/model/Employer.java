@@ -22,14 +22,14 @@ public class Employer {
 	
 	private String name;
 	
+	@OneToMany(mappedBy = "employer")
+	private Set<Title> titles = new TreeSet<>();
+	
 	public Employer(long id, String name) {
 		super();
 		this.employerId = id;
 		this.name = name;
 	}
-
-	@OneToMany(mappedBy = "titleId")
-	private Set<Title> titles = new TreeSet<>();
 	
 	public Employer() {
 		super();
@@ -39,6 +39,22 @@ public class Employer {
 		super();
 		this.name = name;
 	}
+
+	public Long getEmployerId() {
+		return employerId;
+	}
+
+	public void setEmployerId(Long employerId) {
+		this.employerId = employerId;
+	}
+
+//	public Set<Title> getTitles() {
+//		return titles;
+//	}
+//
+//	public void setTitles(Set<Title> titles) {
+//		this.titles = titles;
+//	}
 
 	public Long getId() {
 		return employerId;

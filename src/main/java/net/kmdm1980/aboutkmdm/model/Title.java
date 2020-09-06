@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Title {
 	 * Not sure if I need a bi-directional relation here.
 	 */
 	@ManyToOne
-//	@JoinColumn(name = "employerId")
+	@JoinColumn(name = "employerId")
 	private Employer employer;
 	
 	private String name;
@@ -39,7 +40,7 @@ public class Title {
 	@Column(name = "to_date")
 	private Date toDate;
 	
-	@OneToMany(mappedBy = "itemId")
+	@OneToMany(mappedBy = "title", cascade = CascadeType.ALL)
 	private Set<Item> items = new TreeSet<>();
 
 	public Title(long id, Employer employer, String name, Date fromDate, Date toDate) {
