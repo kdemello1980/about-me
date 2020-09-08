@@ -1,22 +1,18 @@
 package net.kmdm1980.aboutkmdm.model;
 
 
-import java.sql.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -24,10 +20,13 @@ import javax.persistence.Table;
 @Table(name = "titles")
 public class Title {
 
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "title_id")
 	private long titleId;
 	
-
+	@ManyToOne
+	@JoinColumn(name = "employerId")
 	private Employer employer;
 	
 	private String name;
@@ -62,12 +61,12 @@ public class Title {
 		this.toDate = toDate;
 	}
 
-	public long getId() {
+	public long getTitleId() {
 		return titleId;
 	}
 
-	public void setId(long id) {
-		this.titleId = id;
+	public void setTitleId(long titleId) {
+		this.titleId = titleId;
 	}
 
 	public Employer getEmployer() {
@@ -103,18 +102,11 @@ public class Title {
 	}
 
 	@Override
-	public String toString() {
-		return "Title [id=" + titleId + ", employer=" + employer + ", name=" + name + ", fromDate=" + fromDate
-				+ ", toDate=" + toDate + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((employer == null) ? 0 : employer.hashCode());
 		result = prime * result + ((fromDate == null) ? 0 : fromDate.hashCode());
-		result = prime * result + ((items == null) ? 0 : items.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + (int) (titleId ^ (titleId >>> 32));
 		result = prime * result + ((toDate == null) ? 0 : toDate.hashCode());
@@ -140,11 +132,6 @@ public class Title {
 				return false;
 		} else if (!fromDate.equals(other.fromDate))
 			return false;
-		if (items == null) {
-			if (other.items != null)
-				return false;
-		} else if (!items.equals(other.items))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -159,6 +146,12 @@ public class Title {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Title [titleId=" + titleId + ", employer=" + employer + ", name=" + name + ", fromDate=" + fromDate
+				+ ", toDate=" + toDate + "]";
+	}
+
 	
 }

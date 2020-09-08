@@ -3,27 +3,27 @@ package net.kmdm1980.aboutkmdm.model;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "employers")
 public class Employer {
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "employer_id")
 	private Long employerId;
 	
 	private String name;
 	private Long hireYear;
 	
+	@OneToMany(mappedBy = "employer")
 	private Set<Title> titles = new TreeSet<>();
 	
 	public Employer(long employerId, String name) {
@@ -65,14 +65,6 @@ public class Employer {
 		this.hireYear = hireYear;
 	}
 
-	public Set<Title> getTitles() {
-		return titles;
-	}
-
-	public void setTitles(Set<Title> titles) {
-		this.titles = titles;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,7 +72,6 @@ public class Employer {
 		result = prime * result + ((employerId == null) ? 0 : employerId.hashCode());
 		result = prime * result + ((hireYear == null) ? 0 : hireYear.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((titles == null) ? 0 : titles.hashCode());
 		return result;
 	}
 
@@ -108,19 +99,15 @@ public class Employer {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (titles == null) {
-			if (other.titles != null)
-				return false;
-		} else if (!titles.equals(other.titles))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Employer [employerId=" + employerId + ", name=" + name + ", hireYear=" + hireYear + ", titles=" + titles
-				+ "]";
+		return "Employer [employerId=" + employerId + ", name=" + name + ", hireYear=" + hireYear + "]";
 	}
+
+	
 
 
 	

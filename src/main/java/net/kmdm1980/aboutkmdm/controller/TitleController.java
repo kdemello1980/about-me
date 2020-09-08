@@ -54,7 +54,7 @@ public class TitleController {
 					title.setToDate(newTitle.getToDate());
 					return titleRepository.save(title);
 				}).orElseGet(() -> {
-					newTitle.setId(id);
+					newTitle.setTitleId(id);
 					return titleRepository.save(newTitle);
 				});
 	}

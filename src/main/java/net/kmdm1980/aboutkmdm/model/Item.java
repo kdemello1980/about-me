@@ -1,17 +1,13 @@
 package net.kmdm1980.aboutkmdm.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -19,10 +15,13 @@ import javax.persistence.Table;
 @Table(name = "items")
 public class Item {
 	
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "item_id")
 	private Long itemId;
 	
-
+	@ManyToOne
+	@JoinColumn(name = "titleId")
 	private Title title;
 
 	private String text;

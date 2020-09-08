@@ -48,6 +48,7 @@ public class EmployerController {
 		return service.findById(id)
 				.map(employer -> {
 					employer.setName(newEmployer.getName());
+					employer.setHireYear(newEmployer.getHireYear());
 					return service.save(employer);
 				}).orElseGet(() -> {
 					newEmployer.setEmployerId(id);
