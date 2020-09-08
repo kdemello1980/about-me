@@ -3,31 +3,32 @@ package net.kmdm1980.aboutkmdm.model;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "employers")
 public class Employer {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "eid")
+	
 	private Long employerId;
 	
 	private String name;
+	private Long hireYear;
 	
-	@OneToMany(mappedBy = "employer")
 	private Set<Title> titles = new TreeSet<>();
 	
-	public Employer(long id, String name) {
+	public Employer(long employerId, String name) {
 		super();
-		this.employerId = id;
+		this.employerId = employerId;
 		this.name = name;
 	}
 	
@@ -48,22 +49,6 @@ public class Employer {
 		this.employerId = employerId;
 	}
 
-//	public Set<Title> getTitles() {
-//		return titles;
-//	}
-//
-//	public void setTitles(Set<Title> titles) {
-//		this.titles = titles;
-//	}
-
-	public Long getId() {
-		return employerId;
-	}
-
-	public void setId(Long id) {
-		this.employerId = id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -72,9 +57,20 @@ public class Employer {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "Employer [id=" + employerId + ", name=" + name + "]";
+	public Long getHireYear() {
+		return hireYear;
+	}
+
+	public void setHireYear(Long hireYear) {
+		this.hireYear = hireYear;
+	}
+
+	public Set<Title> getTitles() {
+		return titles;
+	}
+
+	public void setTitles(Set<Title> titles) {
+		this.titles = titles;
 	}
 
 	@Override
@@ -82,6 +78,7 @@ public class Employer {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((employerId == null) ? 0 : employerId.hashCode());
+		result = prime * result + ((hireYear == null) ? 0 : hireYear.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((titles == null) ? 0 : titles.hashCode());
 		return result;
@@ -101,6 +98,11 @@ public class Employer {
 				return false;
 		} else if (!employerId.equals(other.employerId))
 			return false;
+		if (hireYear == null) {
+			if (other.hireYear != null)
+				return false;
+		} else if (!hireYear.equals(other.hireYear))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -113,6 +115,14 @@ public class Employer {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Employer [employerId=" + employerId + ", name=" + name + ", hireYear=" + hireYear + ", titles=" + titles
+				+ "]";
+	}
+
+
 	
 	
 }

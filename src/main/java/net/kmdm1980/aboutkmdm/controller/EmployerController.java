@@ -50,7 +50,7 @@ public class EmployerController {
 					employer.setName(newEmployer.getName());
 					return service.save(employer);
 				}).orElseGet(() -> {
-					newEmployer.setId(id);
+					newEmployer.setEmployerId(id);
 					return service.save(newEmployer);
 				});
 	}
