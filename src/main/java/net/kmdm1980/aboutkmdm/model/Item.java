@@ -24,6 +24,7 @@ public class Item {
 	@JoinColumn(name = "titleId")
 	private Title title;
 
+	@Column(columnDefinition = "TEXT")
 	private String text;
 
 	public Item(Long itemId, Title title, String text) {
